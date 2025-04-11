@@ -161,12 +161,12 @@ class HexAI:
         self.player_a_moves = []
         self.player_b_moves = []
 
-    async def _heuristics(self, position: Tuple[int, int], player: int):
+    async def _heuristics(self, position: Tuple[int, int], player: int, size: int):
         x, y = position
 
         if player == 1:
-            return 10 - y
-        return 10 - x
+            return size - 1 - y
+        return size - 1 - x
 
     async def _a_star(self, board: HexGameSim, player: int) -> float:
         if player == -1:
@@ -182,7 +182,7 @@ class HexAI:
                 continue
 
             position = tuple(position)
-            h = await self._heuristics(position, player) 
+            h = await self._heuristics(position, player, board.size) 
             heapq.heappush(q, (h, position))
 
         while len(q) != 0:
@@ -212,7 +212,7 @@ class HexAI:
                     continue
 
                 weight = 0 if board.board[neighbor] == player else 1
-                h = await self._heuristics(neighbor, player)
+                h = await self._heuristics(neighbor, player, board.size)
 
                 f = _weight + weight + h
                 heapq.heappush(q, (f, neighbor))
