@@ -146,8 +146,6 @@ print(f"👉 Movimiento seleccionado: {mejor_movimiento}")
 ```
 
 ## 🏆 Métricas de Rendimiento
-- Tiempo promedio por movimiento: <5s (en hardware moderno)
-- Profundidad de búsqueda típica: 3-5 niveles
+- Tiempo promedio por movimiento: <45s (en hardware moderno)
+- Profundidad de búsqueda típica: 3 niveles
 - Eficiencia de memoria: memoización de estados recurrentes
-
-📝 **Licencia**: MIT
