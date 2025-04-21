@@ -182,7 +182,7 @@ class HexAI:
                 continue
 
             position = tuple(position)
-            h = await self._heuristics(position, player, board.size) 
+            h = await self._heuristics(position, player, board.board_size) 
             heapq.heappush(q, (h, position))
 
         while len(q) != 0:
@@ -195,7 +195,7 @@ class HexAI:
 
             distances[position] = _weight
 
-            if (player == 1 and y == 10) or (player == -1 and x == 10):
+            if (player == 1 and y == board.board_size - 1) or (player == -1 and x == board.board_size - 1):
                 return _weight
 
             for c, r in HEX_NEIGHBORS:
@@ -212,7 +212,7 @@ class HexAI:
                     continue
 
                 weight = 0 if board.board[neighbor] == player else 1
-                h = await self._heuristics(neighbor, player, board.size)
+                h = await self._heuristics(neighbor, player, board.board_size)
 
                 f = _weight + weight + h
                 heapq.heappush(q, (f, neighbor))
